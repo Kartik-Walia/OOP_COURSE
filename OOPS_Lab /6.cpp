@@ -16,72 +16,43 @@
 // to include the necessary functionality for input and output operations in C++ programs.
 
 #include <iostream>
-
 using namespace std;
-class Rational
-{
+class Rational{
 private:
-    double numerator;
-    double denominator;
-
+    double numerator; double denominator;
 public:
-    // Constructors
     Rational() : numerator(0.0), denominator(1.0) {} // Default constructor
     Rational(double num, double denom) : numerator(num), denominator(denom) {} // Parametrised Constructor
-
-    // Overload + operator to add two rational numbers
-    Rational operator+(const Rational &other) const
-    {
+    Rational operator+(const Rational &other) const{
         double resultNum = (numerator * other.denominator) + (other.numerator * denominator);
         double resultDenom = denominator * other.denominator;
         return Rational(resultNum, resultDenom);
     }
-
-    // Reduce the rational number by eliminating the highest common factor
-    void Reduce()
-    {
+    void Reduce(){
         double gcd = GCD(numerator, denominator);
         numerator /= gcd;
         denominator /= gcd;
     }
-
-    // Overload >> operator to enable input
-    friend istream &operator>>(istream &in, Rational &rational)
-    {
-        in >> rational.numerator >> rational.denominator;
-        return in;
+    friend istream &operator>>(istream &in, Rational &rational){
+        in >> rational.numerator >> rational.denominator; return in;
     }
-
-    // Overload << operator to enable output
-    friend ostream &operator<<(ostream &out, const Rational &rational)
-    {
-        out << rational.numerator << "/" << rational.denominator;
-        return out;
+    friend ostream &operator<<(ostream &out, const Rational &rational){
+        out << rational.numerator << "/" << rational.denominator; return out;
     }
-
 private:
-    // Helper function to find the greatest common divisor (GCD)
-    double GCD(double a, double b)
-    {
-        if (b == 0)
-        {
-            return a;
-        }
+    double GCD(double a, double b){
+        if (b == 0){return a;}
         return GCD(b, fmod(a, b)); // Use fmod for floating-point numbers
     }
 };
-
-int main()
-{
+int main(){
     Rational r1, r2, result;
-
     cout << "Enter two rational numbers in the format 'numerator denominator': ";
     cin >> r1 >> r2;
-
     result = r1 + r2;
     result.Reduce();
-
     cout << "Result: " << result << endl;
-
     return 0;
 }
+
+
