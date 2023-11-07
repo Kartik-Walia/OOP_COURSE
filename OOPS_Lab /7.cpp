@@ -10,9 +10,9 @@ struct Student
 };
 int main()
 {
-    ofstream outFile("student_data.dat", std::ios::binary);
+    ofstream outFile("student_data.dat", ios::binary);
     if (!outFile){
-        cerr << "Error opening file for writing!" << std::endl;
+        cerr << "Error opening file for writing!" << endl;
         return 1;
     }
     Student student;
